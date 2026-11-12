@@ -8,7 +8,7 @@ Requires Node.js 22+ and Docker with Compose.
 
 ```sh
 npm install
-cp .env.example .env
+# Create .env with the variables listed below
 docker compose up -d
 npm run db:migrate
 npm run dev
@@ -23,7 +23,7 @@ SEED_EMAIL=pilot@example.com SEED_PASSWORD='choose-a-long-password' npm run db:s
 ```
 
 ## Configuration
-`DATABASE_URL` is required. `APP_ORIGIN` must match the browser origin. `DEMO_MODE=true` explicitly selects deterministic extraction and canned tutoring. Demo never grades learner answers or raises mastery. Set it to `false` and provide server-only `OPENAI_API_KEY` for live assessment. `LLM_BASE_URL` and `LLM_MODEL` configure an OpenAI-compatible chat-completions endpoint. No provider keys are sent to the browser. `.env.example` lists defaults. Token output is currently capped at 1800 in code.
+`DATABASE_URL` is required. `APP_ORIGIN` must match the browser origin. `DEMO_MODE=true` explicitly selects deterministic extraction and canned tutoring. Demo never grades learner answers or raises mastery. Set it to `false` and provide server-only `OPENAI_API_KEY` for live assessment. `LLM_BASE_URL` and `LLM_MODEL` configure an OpenAI-compatible chat-completions endpoint. No provider keys are sent to the browser. Create a local, untracked `.env` with `DATABASE_URL`, `APP_ORIGIN=http://localhost:3000`, and `DEMO_MODE=true`. For live AI also set `OPENAI_API_KEY`; optional defaults are `LLM_BASE_URL=https://api.openai.com/v1` and `LLM_MODEL=gpt-4o-mini`. Token output is currently capped at 1800 in code.
 
 ## Implemented
 Email/password authentication with hashed passwords and hashed opaque session tokens; per-user source/session access checks; text imports; exact-substring provenance checks; explicit objective approval; persisted sessions/transcripts; conservative assessment evidence guards; transactional assessment/review writes; idempotency keys on turn requests; session summaries derived from recorded events; source and API session deletion. Browser speech synthesis and typed input. PostgreSQL migration and optional seed.
